@@ -3,8 +3,16 @@ import { Link } from 'react-router-dom';
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import LogoDark from '../../images/logo/logo-dark.svg';
 import Logo from '../../images/logo/logo.svg';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const SignUp: React.FC = () => {
+  const { loginWithRedirect } = useAuth0();
+
+  const handleSignup = () => {
+    loginWithRedirect({
+      screen_hint: 'signup', // Ensures the user is redirected to the sign-up page
+    });
+  };
   return (
     <>
       <Breadcrumb pageName="Sign Up" />
@@ -299,7 +307,10 @@ const SignUp: React.FC = () => {
                   />
                 </div>
 
-                <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
+                <button
+                  onClick={() => loginWithRedirect({ screen_hint: 'signup' })}
+                  className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50"
+                >
                   <span>
                     <svg
                       width="20"
